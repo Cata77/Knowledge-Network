@@ -1,5 +1,14 @@
 package com.knowledge_network.dto;
 
-public class StudentDto {
+import com.knowledge_network.model.Subject;
 
-}
+import java.math.BigDecimal;
+import java.util.List;
+
+public record StudentDto(
+        String firstName,
+        String lastName,
+        int age,
+        BigDecimal credits,
+        List<Subject> trackSubjects
+) {}

@@ -3,6 +3,7 @@ package com.knowledge_network.controller;
 import com.knowledge_network.dto.AuthenticatedUserDto;
 import com.knowledge_network.model.User;
 import com.knowledge_network.service.AuthenticationService;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,8 +25,11 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<User> authenticateUser(@RequestBody AuthenticatedUserDto authenticatedUserDto) {
+    public ResponseEntity<User> authenticateUser(
+            @RequestBody AuthenticatedUserDto authenticatedUserDto,
+            HttpSession session) {
         User user = authenticationService.authenticateUser(authenticatedUserDto);
+        session.setAttribute("user", user);
         logger.log(Level.INFO, "Authenticated user: {}.", user);
         return ResponseEntity
                 .status(HttpStatus.OK)
