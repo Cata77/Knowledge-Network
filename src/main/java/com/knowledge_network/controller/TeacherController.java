@@ -2,7 +2,6 @@ package com.knowledge_network.controller;
 
 import com.knowledge_network.dto.TeacherDto;
 import com.knowledge_network.model.Teacher;
-import com.knowledge_network.model.User;
 import com.knowledge_network.service.TeacherServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -32,11 +31,10 @@ public class TeacherController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<TeacherDto> showTeacherProfile(@ModelAttribute("user") User user) {
-        logger.log(Level.INFO, "Teacher details: {}", user);
-        TeacherDto teacherDto = (TeacherDto) teacherServiceImpl.convertUserToDto(user);
+    public ResponseEntity<TeacherDto> showTeacherProfile(@ModelAttribute("user") TeacherDto teacher) {
+        logger.log(Level.INFO, "Teacher details: {}", teacher);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(teacherDto);
+                .body(teacher);
     }
 }

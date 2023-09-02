@@ -25,6 +25,7 @@ public class StudentServiceImpl implements UserService {
         Student student = (Student) user;
 
         return new StudentDto(
+                student.getId(),
                 student.getFirstName(),
                 student.getLastName(),
                 student.getAge(),

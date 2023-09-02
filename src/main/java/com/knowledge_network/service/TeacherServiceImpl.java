@@ -25,6 +25,7 @@ public class TeacherServiceImpl implements UserService {
         Teacher teacher = (Teacher) user;
 
         return new TeacherDto(
+                teacher.getId(),
                 teacher.getFirstName(),
                 teacher.getLastName(),
                 teacher.getAge(),

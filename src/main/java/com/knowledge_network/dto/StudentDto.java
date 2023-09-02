@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record StudentDto(
+        Long id,
         String firstName,
         String lastName,
         int age,
