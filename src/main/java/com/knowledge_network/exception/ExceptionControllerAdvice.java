@@ -14,4 +14,13 @@ public class ExceptionControllerAdvice {
                 .badRequest()
                 .body(errorDetails);
     }
+
+    @ExceptionHandler(SubjectNotFoundException.class)
+    public ResponseEntity<ErrorDetails> exceptionSubjectNotFoundHandler() {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setMessage("Course not found!");
+        return ResponseEntity
+                .badRequest()
+                .body(errorDetails);
+    }
 }

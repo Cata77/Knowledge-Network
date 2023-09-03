@@ -12,4 +12,12 @@ public interface StudentRepository extends Neo4jRepository<Student, Long> {
     @Query("MATCH (student:Student) " +
             "WHERE student.userName = $userName AND student.password = $password RETURN student")
     Optional<Student> findStudentByUsernameAndPassword(String userName, String password);
+
+    @Query("""
+            MATCH (student:Student)
+            WITH student
+            MATCH (subject:Subject)
+            WHERE ID(student) = $studentId AND ID(subject) = $subjectId
+            CREATE (student) -[:ENROLLED_IN]-> (subject)""")
+    void createRelationshipBetweenStudentAndCourse(Long studentId, Long subjectId);
 }

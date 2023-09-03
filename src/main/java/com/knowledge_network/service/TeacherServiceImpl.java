@@ -3,7 +3,6 @@ package com.knowledge_network.service;
 import com.knowledge_network.dto.TeacherDto;
 import com.knowledge_network.model.Teacher;
 import com.knowledge_network.model.User;
-import com.knowledge_network.model.UserService;
 import com.knowledge_network.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +30,10 @@ public class TeacherServiceImpl implements UserService {
                 teacher.getAge(),
                 teacher.getSubjects()
         );
+    }
+
+    @Override
+    public void createRelationship(Long userId, Long subjectId) {
+
     }
 }

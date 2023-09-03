@@ -3,7 +3,6 @@ package com.knowledge_network.service;
 import com.knowledge_network.dto.StudentDto;
 import com.knowledge_network.model.Student;
 import com.knowledge_network.model.User;
-import com.knowledge_network.model.UserService;
 import com.knowledge_network.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +31,10 @@ public class StudentServiceImpl implements UserService {
                 student.getCredits(),
                 student.getTrackSubjects()
         );
+    }
+
+    @Override
+    public void createRelationship(Long userId, Long subjectId) {
+        studentRepository.createRelationshipBetweenStudentAndCourse(userId, subjectId);
     }
 }
