@@ -23,12 +23,12 @@ public class AuthenticationService {
 
     public User authenticateUser(AuthenticatedUserDto authenticatedUserDto) {
         Optional<Student> student = studentRepository.findStudentByUsernameAndPassword(
-                authenticatedUserDto.userName(), authenticatedUserDto.password());
+                authenticatedUserDto.getUserName(), authenticatedUserDto.getPassword());
         if (student.isPresent())
             return student.get();
 
         Optional<Teacher> teacher = teacherRepository.findTeacherByUsernameAndPassword(
-                authenticatedUserDto.userName(), authenticatedUserDto.password());
+                authenticatedUserDto.getUserName(), authenticatedUserDto.getPassword());
         if (teacher.isPresent())
             return teacher.get();
 

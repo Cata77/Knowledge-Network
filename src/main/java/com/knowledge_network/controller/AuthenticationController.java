@@ -12,14 +12,14 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/v1/authenticate")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
@@ -33,11 +33,17 @@ public class AuthenticationController {
         this.teacherService = teacherService;
     }
 
+    @GetMapping
+    public String showLoginForm(Model model) {
+        AuthenticatedUserDto userDto = new AuthenticatedUserDto();
+        model.addAttribute("user", userDto);
+        return "login.html";
+    }
+
     @PostMapping
-    public ResponseEntity<User> authenticateUser(
-            @RequestBody AuthenticatedUserDto authenticatedUserDto,
+    public String authenticateUser(@ModelAttribute AuthenticatedUserDto userDto,
             HttpSession session) {
-        User user = authenticationService.authenticateUser(authenticatedUserDto);
+        User user = authenticationService.authenticateUser(userDto);
         if (user instanceof Student) {
             StudentDto studentDto = (StudentDto) studentService.convertUserToDto(user);
             session.setAttribute("user", studentDto);
@@ -46,8 +52,6 @@ public class AuthenticationController {
             session.setAttribute("user", teacherDto);
         }
         logger.log(Level.INFO, "Authenticated user: {}.", user);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(user);
+        return "redirect:/test";
     }
 }

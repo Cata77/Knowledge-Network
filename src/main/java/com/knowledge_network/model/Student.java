@@ -5,7 +5,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,12 +15,6 @@ public class Student extends User{
     private Long id;
     private BigDecimal credits;
     private List<Subject> trackSubjects;
-
-    public Student(String firstName, String lastName, int age, String userName, String password, BigDecimal credits, List<Subject> trackSubjects) {
-        super(firstName, lastName, age, userName, password);
-        this.credits = BigDecimal.ZERO;
-        this.trackSubjects = new ArrayList<>();
-    }
 
     public Long getId() {
         return id;

@@ -4,7 +4,6 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,11 +13,6 @@ public class Teacher extends User{
     @GeneratedValue
     private Long id;
     private List<Subject> subjects;
-
-    public Teacher(String firstName, String lastName, int age, String userName, String password, List<Subject> subjects) {
-        super(firstName, lastName, age, userName, password);
-        this.subjects = new ArrayList<>();
-    }
 
     public Long getId() {
         return id;

@@ -5,17 +5,9 @@ import java.util.Objects;
 public class User {
     private String firstName;
     private String lastName;
-    private int age;
+    private Integer age;
     private String userName;
     private String password;
-
-    public User(String firstName, String lastName, int age, String userName, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.userName = userName;
-        this.password = password;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -33,11 +25,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -62,7 +54,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(age, user.age) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override

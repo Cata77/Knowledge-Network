@@ -10,9 +10,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @SessionAttributes("user")
 @RequestMapping("/v1/student")
 public class StudentController{
@@ -25,14 +27,18 @@ public class StudentController{
         this.subjectService = subjectService;
     }
 
+    @GetMapping("/register")
+    public String showStudentRegisterForm(Model model) {
+        Student student = new Student();
+        model.addAttribute("student", student);
+        return "studentRegister.html";
+    }
 
-    @PostMapping("/create")
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    @PostMapping("/register")
+    public String createStudent(@ModelAttribute Student student) {
         logger.log(Level.INFO, student);
         studentServiceImpl.saveUser(student);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(student);
+        return "redirect:/v1/authenticate";
     }
 
     @GetMapping("/profile")
